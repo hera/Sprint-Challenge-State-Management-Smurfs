@@ -1,7 +1,8 @@
 import {
     GET_SMURFS_SUCCESS,
     GET_SMURFS_FAILURE,
-    TOGGLE_ADD_FORM
+    TOGGLE_ADD_FORM,
+    SET_EDITING_SMURF
 } from './actionTypes';
 
 import axios from 'axios';
@@ -26,5 +27,13 @@ export const getSmurfs = () => (dispatch) => {
 export const toggleAddForm = () => (dispatch) => {
     dispatch({
         type: TOGGLE_ADD_FORM
+    });
+}
+
+
+export const setEditingSmurf = (smurfId) => (dispatch) => {
+    dispatch({
+        type: SET_EDITING_SMURF,
+        payload: smurfId
     });
 }

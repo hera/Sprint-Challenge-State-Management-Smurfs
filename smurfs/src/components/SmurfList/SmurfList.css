@@ -1,0 +1,12 @@
+.controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.controls a {
+    margin-left: 1rem;
+}

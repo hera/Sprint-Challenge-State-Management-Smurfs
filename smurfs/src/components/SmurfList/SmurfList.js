@@ -1,19 +1,39 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux';
-import { getSmurfs } from '../../actions';
+import { getSmurfs, setEditingSmurf } from '../../actions';
 import Smurf from '../Smurf/Smurf';
+import EditForm from '../EditForm/EditForm';
+import './SmurfList.css';
+import { Row, Col } from 'reactstrap';
 
 function SmurfList (props) {
     useEffect(() => {
         props.getSmurfs();
     }, []);
 
+    function handleSetEditingSmurf (event, smurfId) {
+        event.preventDefault();
+        props.setEditingSmurf(smurfId);
+    }
+
     return (
         <>
             <hr />
             {
                 props.smurfs && props.smurfs.map((smurf, key) => {
-                    return <Smurf key={key} smurf={smurf} />
+                    return (
+                        <Row key={key}>
+                            <Col>
+                                <div className="controls">
+                                    <a href="/#" onClick={event => handleSetEditingSmurf(event, smurf.id)}>Edit</a>
+                                </div>
+                                { smurf.id === props.editingSmurf
+                                  ? <EditForm smurf={smurf} />
+                                  : <Smurf smurf={smurf} />
+                                }
+                            </Col>
+                        </Row>
+                    );
                 })
             }
         </>
@@ -21,7 +41,13 @@ function SmurfList (props) {
 }
 
 const mapState = (state) => ({
-    smurfs: state.smurfs
+    smurfs: state.smurfs,
+    editingSmurf: state.editingSmurf
 });
 
-export default connect(mapState, {getSmurfs})(SmurfList);
+const mapDispatch = {
+    getSmurfs,
+    setEditingSmurf
+};
+
+export default connect(mapState, mapDispatch)(SmurfList);

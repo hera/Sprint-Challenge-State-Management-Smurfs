@@ -21,7 +21,7 @@ function AddForm (props) {
         <Row>
             <Col>
                 <Button color="primary" onClick={props.toggleAddForm} style={{ marginBottom: '1rem' }}>New</Button>
-                <Collapse isOpen={props.addFormExpanded}>
+                <Collapse isOpen={props.isAddFormExpanded}>
                     <Card>
                         <CardBody>
                         <Form>
@@ -51,7 +51,7 @@ function AddForm (props) {
 
 
 const mapState = (state) => ({
-    addFormExpanded: state.addFormExpanded
+    isAddFormExpanded: state.isAddFormExpanded
 });
 
 export default connect(mapState, {toggleAddForm})(AddForm);
