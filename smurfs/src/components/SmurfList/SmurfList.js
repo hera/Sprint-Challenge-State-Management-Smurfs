@@ -25,7 +25,7 @@ function SmurfList (props) {
                         <Row key={key}>
                             <Col>
                                 <div className="controls">
-                                    <a href="/#" onClick={event => handleSetEditingSmurf(event, smurf.id)}>Edit</a>
+                                    { /* <a href="/#" onClick={event => handleSetEditingSmurf(event, smurf.id)}>Edit</a> */ }
                                 </div>
                                 { smurf.id === props.editingSmurf
                                   ? <EditForm smurf={smurf} />

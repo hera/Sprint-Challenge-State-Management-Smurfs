@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
-import { toggleAddForm } from '../../actions';
+import { toggleAddForm, setSmurfCandidate, addSmurf } from '../../actions';
 
 import {
     Row,
@@ -14,8 +14,22 @@ import {
     Label,
     Input
 } from 'reactstrap';
+import { smurfCandidateReducer } from "../../reducers/reducers";
 
 function AddForm (props) {
+
+    function handleAddFormChange () {
+        props.setSmurfCandidate({
+            name: document.getElementById('name').value,
+            age: document.getElementById('age').value,
+            height: document.getElementById('height').value
+        });
+    }
+
+    function handleSmurfSubmit (event) {
+        event.preventDefault();
+        props.addSmurf(props.smurfCandidate);
+    }
 
     return (
         <Row>
@@ -24,18 +38,18 @@ function AddForm (props) {
                 <Collapse isOpen={props.isAddFormExpanded}>
                     <Card>
                         <CardBody>
-                        <Form>
+                        <Form onSubmit={(event) => handleSmurfSubmit(event)}>
                             <FormGroup>
                                 <Label for="name">Name:</Label>
-                                <Input type="text" name="name" id="name" placeholder="e.g. Mike" />
+                                <Input type="text" name="name" id="name" placeholder="e.g. Mike" value={props.smurfCandidate.name} onChange={handleAddFormChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="age">Age:</Label>
-                                <Input type="number" name="age" id="age" min="1" max="1000" />
+                                <Input type="number" name="age" id="age" min="1" max="1000" value={props.smurfCandidate.age} onChange={handleAddFormChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="height">Height (cm):</Label>
-                                <Input type="number" name="height" id="height" min="1" />
+                                <Input type="number" name="height" id="height" min="1" value={props.smurfCandidate.height} onChange={handleAddFormChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Button color="warning">Add a Smurf</Button>
@@ -51,7 +65,8 @@ function AddForm (props) {
 
 
 const mapState = (state) => ({
-    isAddFormExpanded: state.isAddFormExpanded
+    isAddFormExpanded: state.isAddFormExpanded,
+    smurfCandidate: state.smurfCandidate
 });
 
-export default connect(mapState, {toggleAddForm})(AddForm);
+export default connect(mapState, {toggleAddForm, setSmurfCandidate, addSmurf})(AddForm);

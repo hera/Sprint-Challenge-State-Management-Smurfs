@@ -1,7 +1,8 @@
 import {
     smurfsReducer,
     isAddFormExpandedReducer,
-    editingSmurfReducer
+    editingSmurfReducer,
+    smurfCandidateReducer
 } from './reducers';
 import { combineReducers } from 'redux';
 
@@ -9,5 +10,6 @@ import { combineReducers } from 'redux';
 export default combineReducers({
     smurfs: smurfsReducer,
     isAddFormExpanded: isAddFormExpandedReducer,
-    editingSmurf: editingSmurfReducer
+    editingSmurf: editingSmurfReducer,
+    smurfCandidate: smurfCandidateReducer
 });
