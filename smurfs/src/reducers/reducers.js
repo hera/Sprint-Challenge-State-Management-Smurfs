@@ -1,6 +1,7 @@
 import {
     GET_SMURFS_SUCCESS,
-    GET_SMURFS_FAILURE
+    GET_SMURFS_FAILURE,
+    TOGGLE_ADD_FORM
 } from '../actions/actionTypes';
 
 export function smurfsReducer (state = [], action) {
@@ -12,6 +13,15 @@ export function smurfsReducer (state = [], action) {
             console.log(action.payload);
             return state;
 
+        default:
+            return state;
+    }
+}
+
+export function addFormExpandedReducer (state = false, action) {
+    switch (action.type) {
+        case TOGGLE_ADD_FORM:
+            return !state;
         default:
             return state;
     }

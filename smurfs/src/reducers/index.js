@@ -1,7 +1,8 @@
-import { smurfsReducer } from './reducers';
+import { smurfsReducer, addFormExpandedReducer } from './reducers';
 import { combineReducers } from 'redux';
 
 
 export default combineReducers({
-    smurfs: smurfsReducer
+    smurfs: smurfsReducer,
+    addFormExpanded: addFormExpandedReducer
 });

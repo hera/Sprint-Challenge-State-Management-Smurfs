@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { toggleAddForm } from '../../actions';
+
 import {
     Row,
     Col,
@@ -13,17 +16,12 @@ import {
 } from 'reactstrap';
 
 function AddForm (props) {
-    const [isOpen, setIsOpen] = useState(false);
-
-    function toggleForm () {
-        setIsOpen(!isOpen);
-    }
 
     return (
         <Row>
             <Col>
-                <Button color="primary" onClick={toggleForm} style={{ marginBottom: '1rem' }}>New</Button>
-                <Collapse isOpen={isOpen}>
+                <Button color="primary" onClick={props.toggleAddForm} style={{ marginBottom: '1rem' }}>New</Button>
+                <Collapse isOpen={props.addFormExpanded}>
                     <Card>
                         <CardBody>
                         <Form>
@@ -51,4 +49,9 @@ function AddForm (props) {
     );
 }
 
-export default AddForm;
+
+const mapState = (state) => ({
+    addFormExpanded: state.addFormExpanded
+});
+
+export default connect(mapState, {toggleAddForm})(AddForm);

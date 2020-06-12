@@ -1,6 +1,7 @@
 import {
     GET_SMURFS_SUCCESS,
-    GET_SMURFS_FAILURE
+    GET_SMURFS_FAILURE,
+    TOGGLE_ADD_FORM
 } from './actionTypes';
 
 import axios from 'axios';
@@ -19,4 +20,11 @@ export const getSmurfs = () => (dispatch) => {
                 payload: error
             });
         });
+}
+
+
+export const toggleAddForm = () => (dispatch) => {
+    dispatch({
+        type: TOGGLE_ADD_FORM
+    });
 }
